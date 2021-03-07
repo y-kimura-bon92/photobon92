@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUploadimageTable extends Migration
+class AddImageNameToPuloadimageTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,9 @@ class AddUploadimageTable extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('upload_image', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('file_name');
-            $table->string('file_path');
-            $table->string('image_name');
-            $table->timestamps();
+        Schema::table('uploadimage', function (Blueprint $table) {
+            //
+            
         });
     }
 
@@ -30,6 +26,9 @@ class AddUploadimageTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('uploadimage', function (Blueprint $table) {
+            //
+            $table->dropColumn('image_name');  //カラムの削除
+        });
     }
 }
