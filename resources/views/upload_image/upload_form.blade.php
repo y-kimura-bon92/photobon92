@@ -4,7 +4,7 @@
 
 
 @if (count($errors) > 0)
-<div class="alert alert-danger">
+<div class="alert alert-danger mt_80">
 	<ul>
 		@foreach ($errors->all() as $error)
 			<li>{{ $error }}</li>
@@ -12,7 +12,7 @@
 	</ul>
 </div>
 @endif
-<form method="post" action="{{ route('postUpload') }}" enctype="multipart/form-data">
+<form method="post" action="{{ route('postUpload') }}" enctype="multipart/form-data" class="mt_80">
 	@csrf
 
 	<input type="file" name="image" accept="image/png, image/jpeg ,image/jpg">

@@ -21,26 +21,6 @@ class UploadImageController extends Controller
     // 画像をアップロード
     public function postUpload(Request $request) {
 
-        // $request->input('image_name');
-        var_dump($request->input('image_name'));
-        exit;
-        // $inputs = $request->all();
-
-        // \DB::beginTransaction();
-        
-            // ブログを登録
-            // UploadImage::create($inputs);
-            // \DB::commit();
-        
-        // $inputs = UploadImage::create($request->except(['file_name']));
-        
-        // $inputs = $request->input('image_name');
-        
-        // UploadImage::create($inputs);
-//----------------------------------------------
-
-
-
         $request->validate([
             'image' => 'required|file|image|mimes:png,jpeg,jpg'
         ]);

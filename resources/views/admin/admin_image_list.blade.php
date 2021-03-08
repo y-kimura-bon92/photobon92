@@ -1,30 +1,43 @@
-@extends('layouts.layout')
+@extends('layouts.admin_layout')
+
+@push('css')
+    <link href="{{ asset('css/admin_image_list.css') }}" rel="stylesheet">
+@endpush
+
 @section('title', '管理画面 画像一覧｜PhotoBon_92')
 @section('content')
 
-{{-- アップロードページリンク --}}
-<a href="{{ route('getForm') }}">Upload</a>
-<hr />
-
 {{-- 画像一覧 --}}
-<h2 class="mt_40">新着画像</h2>
+<h2 class="mt_120">管理画面｜画像一覧</h2>
+
+{{-- 更新時のflash --}}
+@if (session('err_msg'))
+<p class="text-danger">
+  {{ session('err_msg') }}
+</p>
+@endif
 
 <div class="row mt_40 mb_120">
 
   @foreach($images as $image)
-  <div class="col-lg-3">
+  <div class="col-lg-3 col-4 mb_40 image_item">
     {{-- 画像表示、クリックで詳細ページ --}}
     <a href="/photobon92/public/details_92/{{ $image->id }}">
-      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="w-100"/>
+      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image" style="max-height: 210px;"/>
     </a>
-    {{-- ファイル名 --}}
-    <label for="">ファイル名</label>
-    <p>{{ $image->file_name }}</p>
-    <p>{{ $image->image_name }}</p>
 
-    {{-- 画像名 --}}
-    <label for="">画像名</label>
-    <input type="text" name="image_name" value="{{ $image->image_name }}">
+    <table class="table table-bordered mt_20">
+      <tbody>
+        <tr>
+          <th>画像名</th>
+          <td>{{ $image->image_name }}</td>
+        </tr>
+        <tr>
+          <th>ファイル名</th>
+          <td>{{ $image->file_name }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   @endforeach
 

@@ -1,0 +1,15 @@
+/* 画像の詳細込みアイテム */
+.image_item {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 1rem;
+}
+
+/* 画像単体 */
+.image {
+  border: 4px double #ccc;
+}
+
+th {
+  width: 37%;
+}

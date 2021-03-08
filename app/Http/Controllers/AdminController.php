@@ -13,7 +13,6 @@ class AdminController extends Controller
     public function getList_92() {
         //アップロードした画像を取得
         $uploads = UploadImage::orderBy("id", "desc")->get();
-        dd($uploads);
 
         // viewを表示 管理画面画像一覧
         return view('admin.admin_image_list', ['images' => $uploads]);
@@ -33,39 +32,19 @@ class AdminController extends Controller
 
     // 画像をアップロード
     public function postUpdate_92(Request $request) {
-        // $request->validate([
-        //     'image' => 'required|file|image|mimes:png,jpeg,jpg'
-        // ]);
-        $upload_image = $request->file('image');
+        
+
+        // inputデータを取得
         $inputs = $request->all();
 
-        $image_id = UploadImage::find($inputs['image_id']);
-
-        // $image_id->fill([
-        //     'image_name' => $inputs['image_name'],
-        //     'file_name' => $inputs['file_name'],
-        // ]);
-        
-
-        UploadImage::where('id', $image_id)->update([
+        $update_image = UploadImage::find($inputs['image_id']);
+        $update_image->fill([
             'image_name' => $inputs['image_name'],
+            'file_name' => $inputs['file_name'],
         ]);
 
-        // 画像名を取得、保存
-        // $inputs->save();
-        
-
-        if($upload_image) {
-            //アップロードされた画像を保存する
-            $path = $upload_image->store('temp',"public");
-            //画像の保存に成功したらDBに記録する
-            if($path){
-                UploadImage::update([
-                    "file_name" => $upload_image->getClientOriginalName(),
-                    "file_path" => $path
-                ]);
-            }
-        }
+        $update_image->save();
+        \Session::flash('err_msg', '画像データを更新しました');
 
         return redirect(route('getList_92'));
     }

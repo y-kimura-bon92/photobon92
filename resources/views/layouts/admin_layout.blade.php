@@ -16,11 +16,13 @@
 
   {{-- lightbox.css --}}
   <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/css/lightbox.css" rel="stylesheet">
+  {{-- lightbox.jq --}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.7.1/js/lightbox.min.js" type="text/javascript"></script>
 </head>
 
 <body>
   <header>
-    @include('layouts.header')
+    @include('layouts.admin_header')
   </header>
 
   <div class="container">

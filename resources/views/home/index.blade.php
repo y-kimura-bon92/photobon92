@@ -3,7 +3,7 @@
 
 <div class="card mt-5">
   <div class="card-body">
-    <p><a href="{{ route('showList') }}" class="btn btn-primary">画像一覧</a></p>
+    <p><a href="{{ route('getList') }}" class="btn btn-primary">画像一覧</a></p>
   </div>
 </div>
 
