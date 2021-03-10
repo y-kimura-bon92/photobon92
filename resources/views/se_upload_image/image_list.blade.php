@@ -21,6 +21,12 @@
   </div>
 </form>
 
+  @if(!empty($message))
+    <div class="alert alert-primary" role="alert">{{ $message}}</div>
+  @endif
+
+
+  @if(isset($images))
 <div class="row mt_40 mb_120">
 
   @foreach($images as $image)
@@ -36,8 +42,10 @@
   </div>
   @endforeach
 
-</div>
+  {{ $images->links() }}
 
+</div>
+@endif
 
 
 {{-- ダウンロード確認ダイアログ --}}

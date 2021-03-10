@@ -48,7 +48,10 @@ class AdminController extends Controller
     // 画像一覧画面
     public function getList_92() {
         //アップロードした画像を取得
-        $uploads = UploadImage::orderBy("id", "desc")->get();
+        // $uploads = UploadImage::orderBy("id", "desc")->get();
+
+        // これでページネーション機能が追加される
+        $uploads = UploadImage::paginate(15);
 
         // viewを表示 管理画面画像一覧
         return view('admin.admin_image_list', ['images' => $uploads]);

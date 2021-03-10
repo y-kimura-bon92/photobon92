@@ -40,6 +40,8 @@
       </div>
     @endforeach
 
+    {{ $pagenate->links() }}
+
   </div>
   @endif
 

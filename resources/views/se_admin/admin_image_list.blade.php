@@ -18,6 +18,21 @@
 </p>
 @endif
 
+{{-- 検索フォーム --}}
+<form action="{{ route('SeGetSearch_92')}}" method="post">
+  {{ csrf_field()}}
+  {{method_field('get')}}
+
+  <div class="form-group row">
+    <input type="text" class="col-lg-8" placeholder="検索したい名前を入力してください" name="keyword_image_name">
+    <button type="submit" class="btn btn-success col-lg-4">検索</button>
+  </div>
+</form>
+
+@if(!empty($message))
+  <div div class="alert alert-primary" role="alert">{{ $message}}</div>
+@endif
+
 <div class="row mt_40 mb_120">
 
   @foreach($images as $image)
@@ -35,7 +50,13 @@
         </tr>
         <tr>
           <th>カテゴリ</th>
-          <td>{{ $image->image_category }}</td>
+          <td>
+            <div class="grad-wrap">
+              <input id="trigger{{$image->id}}" class="grad-trigger" type="checkbox">
+              <label class="grad-btn" for="trigger{{$image->id}}"></label>
+              <div class="grad-item">{{ $image->image_category }}</div>
+            </div>
+          </td>
         </tr>
         <tr>
           <th>ファイル名</th>
@@ -45,6 +66,8 @@
     </table>
   </div>
   @endforeach
+
+  {{ $images->links() }}
 
 </div>
 

@@ -1,24 +1,17 @@
 @extends('layouts.admin_layout')
-@section('title', '管理画面 画像一覧｜PhotoBon_92')
-
 @push('css')
-    <link href="{{ asset('css/admin_image_list.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/admin_image_list.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ asset('css/seCommon.css') }}">
 @endpush
 
+@section('title', '画像一覧｜PhotoBon 92')
 @section('content')
 
+
 {{-- 画像一覧 --}}
-<h2 class="mt_120">管理画面｜画像一覧</h2>
+<h2 class="mt_120">画像検索</h2>
 
-{{-- 更新時のflash --}}
-@if (session('err_msg'))
-<p class="text-danger">
-  {{ session('err_msg') }}
-</p>
-@endif
-
-{{-- 検索フォーム --}}
-<form action="{{ route('getSearch_92')}}" method="post">
+<form action="{{ route('SeGetSearch_92')}}" method="post">
   {{ csrf_field()}}
   {{method_field('get')}}
 
@@ -28,13 +21,18 @@
   </div>
 </form>
 
-<div class="row mt_40 mb_120">
+  @if(!empty($message))
+    <div class="alert alert-primary" role="alert">{{ $message}}</div>
+  @endif
 
-  @foreach($images as $image)
+  @if(isset($images))
+  <div class="row mt_40 mb_120">
+
+    @foreach($images as $image)
   <div class="col-lg-3 col-4 mb_40 image_item">
     {{-- 画像表示、クリックで詳細ページ --}}
-    <a href="/photobon92/public/details_92/{{ $image->id }}">
-      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image" style="max-height: 210px;"/>
+    <a href="/photobon92/public/se/details_92/{{ $image->id }}">
+      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image w-100" style="height: 210px; object-fit: cover; "/>
     </a>
 
     <table class="table table-bordered mt_20">
@@ -62,8 +60,10 @@
   </div>
   @endforeach
 
-  {{ $images->links() }}
+  </div>
+  @endif
 
-</div>
+  
+  
 
 @endsection

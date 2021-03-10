@@ -46,10 +46,13 @@ class SeAdminController extends Controller
 
 
 
-    // 管理画面画 像一覧画面
+    // 管理画面 画像一覧画面
     public function SeGetList_92() {
         //アップロードした画像を取得
-        $uploads = SeUploadImage::orderBy("id", "desc")->get();
+        // $uploads = SeUploadImage::orderBy("id", "desc")->get();
+
+        // これでページネーション機能が追加される
+        $uploads = SeUploadImage::paginate(15);
 
         // viewを表示 管理画面画像一覧
         return view('se_admin.admin_image_list', ['images' => $uploads]);
