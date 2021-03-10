@@ -2,6 +2,7 @@
 
 @push('css')
     <link href="{{ asset('css/admin_detalis.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/seCommon.css') }}">
 @endpush
 
 @section('title', '管理画面 画像一覧｜PhotoBon_92')
@@ -11,7 +12,7 @@
 {{-- 画像一覧 --}}
 <h2 class="mt_120">管理画面｜画像編集</h2>
 
-<form action="{{ route('postUpdate_92') }}" method="POST" enctype="multipart/form-data" onSubmit="return checkSubmit()" class="mt_40">
+<form action="{{ route('SePostUpdate_92') }}" method="POST" enctype="multipart/form-data" onSubmit="return checkSubmit()" class="mt_40">
   @csrf
 
   <input type="hidden" name="image_id" value="{{ $image_id->id }}">
@@ -49,7 +50,7 @@
 </form>
 
 {{-- 削除フォーム --}}
-<form action="{{ route('postDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 mt_10">
+<form action="{{ route('SePostDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 mt_10">
   <td rowspan="1">
     @csrf
     <button type="submit" class="btn btn-danger" onclick=>削除</button>

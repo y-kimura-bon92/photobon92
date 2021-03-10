@@ -13,3 +13,6 @@
 th {
   width: 37%;
 }
+td {
+  overflow-wrap: anywhere;
+}

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UploadImage extends Model
+class SeUploadImage extends Model
 {
     //
-    protected $table = "uploadimage";
+    protected $table = "seuploadimage";
     protected $fillable = [
         'file_name',
         'file_path',

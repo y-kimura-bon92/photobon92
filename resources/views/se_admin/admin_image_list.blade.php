@@ -1,10 +1,11 @@
 @extends('layouts.admin_layout')
-@section('title', '管理画面 画像一覧｜PhotoBon_92')
 
 @push('css')
     <link href="{{ asset('css/admin_image_list.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/seCommon.css') }}">
 @endpush
 
+@section('title', '管理画面 画像一覧｜PhotoBon_92')
 @section('content')
 
 {{-- 画像一覧 --}}
@@ -17,23 +18,13 @@
 </p>
 @endif
 
-<form action="{{ route('getSearch')}}" method="post">
-  {{ csrf_field()}}
-  {{method_field('get')}}
-
-  <div class="form-group row">
-    <input type="text" class="col-lg-8" placeholder="検索したい名前を入力してください" name="keyword_image_name">
-    <button type="submit" class="btn btn-success col-lg-4">検索</button>
-  </div>
-</form>
-
 <div class="row mt_40 mb_120">
 
   @foreach($images as $image)
   <div class="col-lg-3 col-4 mb_40 image_item">
     {{-- 画像表示、クリックで詳細ページ --}}
-    <a href="/photobon92/public/details_92/{{ $image->id }}">
-      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image" style="max-height: 210px;"/>
+    <a href="/photobon92/public/se/details_92/{{ $image->id }}">
+      <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image w-100" style="height: 210px; object-fit: cover; "/>
     </a>
 
     <table class="table table-bordered mt_20">

@@ -12,7 +12,7 @@
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-item nav-link active" href="{{ route('getList') }}">画像一覧 <span class="sr-only"></span></a>
-        {{-- <a class="nav-item nav-link" href="{{ route('getForm') }}">画像アップロード</a> --}}
+        {{-- <a class="nav-item nav-link" href="{{ route('getForm_92') }}">画像アップロード</a> --}}
   
       </div>
     </div>

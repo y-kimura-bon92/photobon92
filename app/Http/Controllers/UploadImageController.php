@@ -10,35 +10,16 @@ use App\Http\Requests\UploadImageRequest;
 class UploadImageController extends Controller
 {
 
-
-    //画像アップロード画面の表示
-    public function getForm() {
-        return view('upload_image.upload_form');
-    }
-
-
-
-    // 画像をアップロード
-    public function postUpload(Request $request) {
-
-        $request->validate([
-            'image' => 'required|file|image|mimes:png,jpeg,jpg'
-        ]);
+    // 検索結果
+    public function getSearch(Request $request) {
+        $keyword_image_names = $request->keyword_image_name;
         
-        $upload_image = $request->file('image');
-    
-        if($upload_image) {
-            //アップロードされた画像をtempディレクトリに保存する
-            $path = $upload_image->store('temp',"public");
-            //画像の保存に成功したらDBに記録する
-            if($path){
-                UploadImage::create([
-                    'file_name' => $upload_image->getClientOriginalName(),
-                    'file_path' => $path,
-                    'image_name' => $request->input('image_name'),
-                ]);
-            }
+        if(!empty($keyword_image_names)) {
+            $query = UploadImage::query();
+            $images = $query->where('image_category', 'like', '%' .$keyword_image_names. '%')->get();
+            $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
         }
-        return redirect(route('getList'));
+
+        return view('search_image.search', ['images' => $images]);
     }
 }

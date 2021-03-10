@@ -2,6 +2,7 @@
 
 @push('css')
     <link href="{{ asset('css/image_list.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/seCommon.css') }}">
 @endpush
 
 @section('title', '画像一覧｜PhotoBon 92')
@@ -10,7 +11,7 @@
 {{-- 画像一覧 --}}
 <h2 class="mt_120">新着画像一覧</h2>
 
-<form action="{{ route('getSearch')}}" method="post">
+<form action="{{ route('SeGetSearch')}}" method="post">
   {{ csrf_field()}}
   {{method_field('get')}}
 

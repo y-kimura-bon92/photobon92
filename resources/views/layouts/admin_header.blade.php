@@ -9,8 +9,13 @@
   {{-- ナビバー --}}
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link active" href="{{ route('getList') }}">画像一覧 <span class="sr-only"></span></a>
-      <a class="nav-item nav-link" href="{{ route('getForm') }}">画像アップロード</a>
+      <a class="nav-item nav-link" href="{{ route('getList') }}">画像一覧 <span class="sr-only"></span></a>
+      <a class="nav-item nav-link active" href="{{ route('getList_92') }}">画像一覧（管理） <span class="sr-only"></span></a>
+      <a class="nav-item nav-link active" href="{{ route('getForm_92') }}">画像アップロード</a>
+      {{-- SEページ --}}
+      <a class="nav-item nav-link" href="{{ route('SeGetList') }}">SE画像一覧</span></a>
+      <a class="nav-item nav-link active" href="{{ route('SeGetList_92') }}">SE画像一覧（管理）</span></a>
+      <a class="nav-item nav-link active" href="{{ route('SeGetForm_92') }}">SE画像アップロード</a>
     </div>
   </div>
   
