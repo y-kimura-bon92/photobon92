@@ -21,10 +21,6 @@ Route::get('/', 'HomeController@showHome')->name('home');
 /*====================================================================
 * ユーザーノーマルページ
 ====================================================================*/ 
-// 画像検索
-Route::get('/search', 'UploadImageController@getSearch')->name('getSearch');
-// 画像検索結果（管理画面）
-Route::get('/search_92', 'UploadImageController@getSearch_92')->name('getSearch_92');
 // 画像一覧画面
 Route::get('/list', 'ImageListController@getList')->name('getList');
 
@@ -33,10 +29,6 @@ Route::get('/list', 'ImageListController@getList')->name('getList');
 /*====================================================================
 * ユーザーシークレットページ
 ====================================================================*/ 
-// 画像検索
-Route::get('/se/search', 'SeUploadImageController@SeGetSearch')->name('SeGetSearch');
-// 画像検索結果（管理画面）
-Route::get('/se/search_92', 'SeUploadImageController@SeGetSearch_92')->name('SeGetSearch_92');
 // 画像一覧画面
 Route::get('/se/list', 'SeUploadImageController@SeGetList')->name('SeGetList');
 

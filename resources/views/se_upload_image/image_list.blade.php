@@ -11,19 +11,21 @@
 {{-- 画像一覧 --}}
 <h2 class="mt_120">新着画像一覧</h2>
 
-<form action="{{ route('SeGetSearch')}}" method="post">
+{{-- 検索フォーム --}}
+<form action="{{ route('SeGetList')}}" method="get">
   {{ csrf_field()}}
   {{method_field('get')}}
 
   <div class="form-group row">
+    {{-- 入力欄 --}}
     <input type="text" class="col-lg-8" placeholder="検索したい名前を入力してください" name="keyword_image_name">
     <button type="submit" class="btn btn-success col-lg-4">検索</button>
   </div>
 </form>
 
-  @if(!empty($message))
-    <div class="alert alert-primary" role="alert">{{ $message}}</div>
-  @endif
+@if(!empty($message))
+  <div class="alert alert-primary" role="alert">{{ $message}}</div>
+@endif
 
 
   @if(isset($images))
@@ -42,7 +44,8 @@
   </div>
   @endforeach
 
-  {{ $images->links() }}
+  {{-- ページネーションリンク --}}
+  {{ $images->appends(request()->input())->links() }}
 
 </div>
 @endif

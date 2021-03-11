@@ -9,12 +9,27 @@
   {{-- ナビバー --}}
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
     <div class="navbar-nav">
-      <a class="nav-item nav-link" href="{{ route('getList') }}">画像一覧 <span class="sr-only"></span></a>
-      <a class="nav-item nav-link active" href="{{ route('getList_92') }}">画像一覧（管理） <span class="sr-only"></span></a>
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          画像一覧
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ route('getList') }}">画像一覧</a>
+          <a class="dropdown-item" href="{{ route('getList_92') }}">画像一覧（管理）</a>
+        </div>
+      </div>      
       <a class="nav-item nav-link active" href="{{ route('getForm_92') }}">画像アップロード</a>
+
       {{-- SEページ --}}
-      <a class="nav-item nav-link" href="{{ route('SeGetList') }}">SE画像一覧</span></a>
-      <a class="nav-item nav-link active" href="{{ route('SeGetList_92') }}">SE画像一覧（管理）</span></a>
+      <div class="dropdown">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-toggle="dropdown">
+          SE画像一覧
+        </button>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="{{ route('SeGetList') }}">SE画像一覧</a>
+          <a class="dropdown-item" href="{{ route('SeGetList_92') }}">SE画像一覧（管理）</a>
+        </div>
+      </div>      
       <a class="nav-item nav-link active" href="{{ route('SeGetForm_92') }}">SE画像アップロード</a>
     </div>
   </div>

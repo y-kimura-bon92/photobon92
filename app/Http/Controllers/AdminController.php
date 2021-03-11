@@ -46,20 +46,26 @@ class AdminController extends Controller
 
 
     // 画像一覧画面
-    public function getList_92() {
-        //アップロードした画像を取得
-        // $uploads = UploadImage::orderBy("id", "desc")->get();
+    public function getList_92(Request $request) {
+        // 入力されたキーワードを取得
+        $keyword_image_names = $request->keyword_image_name;
+        
+        if(!empty($keyword_image_names)) {
+            $query = UploadImage::query();
+            $images = $query->where('image_category', 'like', '%'.$keyword_image_names.'%')->paginate(15);
+            $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
+        } else {
+            // 15件づつページネートを表示する
+            $images = UploadImage::paginate(15);
+            $message = "「".$keyword_image_names."」を含む検索結果が見つかりませんでした。";
+        }
 
-        // これでページネーション機能が追加される
-        $uploads = UploadImage::paginate(15);
-
-        // viewを表示 管理画面画像一覧
-        return view('admin.admin_image_list', ['images' => $uploads]);
+        return view("admin.admin_image_list", ['images' => $images, 'message' => $message]);
     }
 
 
 
-    //画像アップロード画面の表示
+    //画像アップデート画面の表示
     public function getDetails_92($id) {
         // モデルからidを取得する
         $image_id = UploadImage::find($id);
@@ -69,7 +75,7 @@ class AdminController extends Controller
 
 
 
-    // 画像をアップロード
+    // 画像をアップデート
     public function postUpdate_92(Request $request) {
         
 
@@ -92,6 +98,7 @@ class AdminController extends Controller
 
 
 
+    //削除処理
     public function postDelete_92($id) {
         // データを削除
         UploadImage::destroy($id);

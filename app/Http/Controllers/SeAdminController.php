@@ -47,15 +47,22 @@ class SeAdminController extends Controller
 
 
     // 管理画面 画像一覧画面
-    public function SeGetList_92() {
-        //アップロードした画像を取得
-        // $uploads = SeUploadImage::orderBy("id", "desc")->get();
+    public function SeGetList_92(Request $request) {
+        
+        // 入力されたキーワードを取得
+        $keyword_image_names = $request->keyword_image_name;
+        
+        if(!empty($keyword_image_names)) {
+            $query = SeUploadImage::query();
+            $images = $query->where('image_category', 'like', '%'.$keyword_image_names.'%')->paginate(15);
+            $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
+        } else {
+            // 15件づつページネートを表示する
+            $images = SeUploadImage::paginate(15);
+            $message = "「".$keyword_image_names."」を含む検索結果が見つかりませんでした。";
+        }
 
-        // これでページネーション機能が追加される
-        $uploads = SeUploadImage::paginate(15);
-
-        // viewを表示 管理画面画像一覧
-        return view('se_admin.admin_image_list', ['images' => $uploads]);
+        return view("se_admin.admin_image_list", ['images' => $images, 'message' => $message]);
     }
 
 
@@ -92,6 +99,7 @@ class SeAdminController extends Controller
 
 
 
+    //削除処理
     public function SePostDelete_92($id) {
         // データを削除
         SeUploadImage::destroy($id);
