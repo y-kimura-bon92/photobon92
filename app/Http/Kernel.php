@@ -61,6 +61,8 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+        // 2021.03.11 追加 参照（https://qiita.com/logue/items/64c4b5545f76ef17de70）
+        'keyword' => \App\Http\Middleware\KeywordExploder::class,
     ];
 
     /**

@@ -50,17 +50,37 @@ class SeAdminController extends Controller
     public function SeGetList_92(Request $request) {
         
         // 入力されたキーワードを取得
-        $keyword_image_names = $request->keyword_image_name;
-        
-        if(!empty($keyword_image_names)) {
+        // $keyword_image_names = $request->keyword_image_name;
+
+        $keywords = $request->input('keyword_image_name');
+        if(!empty($keywords)) {
             $query = SeUploadImage::query();
-            $images = $query->where('image_category', 'like', '%'.$keyword_image_names.'%')->paginate(15);
-            $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
-        } else {
+            foreach ((array)$keywords as $keyword) {
+                $images = $query->where('image_category','like','%'.$keyword.'%')->orWhere('image_name', 'LIKE', '%'.$keyword.'%')->paginate(15);
+            }
+            $message = "「".$keywords."」を含む検索結果が見つかりました。";
+        }else {
             // 15件づつページネートを表示する
             $images = SeUploadImage::paginate(15);
-            $message = "「".$keyword_image_names."」を含む検索結果が見つかりませんでした。";
+            $message = "「".$keywords."」検索結果が見つかりませんでした。";
         }
+        
+        // if(!empty($keyword_image_names)) {
+
+        //     $query = SeUploadImage::query();
+            
+        //     foreach ((array)$keyword_image_names as $keyword_image_name) {
+        //         $images = $query->where('image_category', 'LIKE', '%'.$keyword_image_name.'%')->orWhere('image_name', 'LIKE', '% '.$keyword_image_name.' %')->paginate(15);
+        //     }
+        //     $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
+        // } else {
+        //     // 15件づつページネートを表示する
+        //     $images = SeUploadImage::paginate(15);
+        //     $message = "「".$keyword_image_names."」を含む検索結果が見つかりませんでした。";
+        // }
+
+        // ---------------------------------------------------
+        
 
         return view("se_admin.admin_image_list", ['images' => $images, 'message' => $message]);
     }

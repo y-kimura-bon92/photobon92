@@ -62,7 +62,7 @@ Route::get('/se/form_92', 'SeAdminController@SeGetForm_92')->name('SeGetForm_92'
 // 画像アップロード処理
 Route::post('/se/upload_92', 'SeAdminController@SePostUpload_92')->name('SePostUpload_92');
 // 画像一覧画面（管理者）
-Route::get('/se/list_92', 'SeAdminController@SeGetList_92')->name('SeGetList_92');
+Route::get('/se/list_92', 'SeAdminController@SeGetList_92')->name('SeGetList_92')->middleware('keyword');
 // 画像アップデート
 Route::post('/se/update_92', 'SeAdminController@SePostUpdate_92')->name('SePostUpdate_92');
 
