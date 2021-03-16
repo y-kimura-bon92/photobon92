@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.layout')
 @section('title', 'SE画像投稿｜PhotoBon_92')
 @section('content')
 

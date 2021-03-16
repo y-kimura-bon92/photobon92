@@ -25,13 +25,13 @@
 
   <div class="form-group row">
     {{-- 入力欄 --}}
-    <input type="text" class="col-lg-8" placeholder="検索したい名前を入力してください" name="keyword_image_name">
+    <input type="text" class="col-lg-8" placeholder="検索したいキーワードを入力してください" name="keyword_image_name">
     <button type="submit" class="btn btn-success col-lg-4">検索</button>
   </div>
 </form>
 
 @if(!empty($message))
-  <div div class="alert alert-primary" role="alert">{{ $message}}</div>
+  <div div class="alert alert-primary" role="alert">{{ $message }}</div>
 @endif
 
 @if(isset($images))
@@ -41,7 +41,7 @@
     <div class="col-lg-3 col-4 mb_40 image_item">
       {{-- 画像表示、クリックで詳細ページ --}}
       <a href="/photobon92/public/se/details_92/{{ $image->id }}">
-        <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" class="image w-100" style="height: 210px; object-fit: cover; "/>
+        <img class="lazy image" data-original="{{ asset("storage/{$image->file_path_th}") }}" alt="{{ $image->image_name }}">
       </a>
 
       <table class="table table-bordered mt_20">

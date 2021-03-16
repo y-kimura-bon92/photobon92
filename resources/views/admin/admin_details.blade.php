@@ -1,4 +1,4 @@
-@extends('layouts.admin_layout')
+@extends('layouts.layout')
 
 @push('css')
     <link href="{{ asset('css/admin_detalis.css') }}" rel="stylesheet">
@@ -22,9 +22,12 @@
       <table class="table table-bordered bg-white">
         <tbody>
           <tr>
-            <td rowspan="4" class="w-25"><img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image_id->file_path}") }}" class="w-100"/></td>
+            <td rowspan="4" class="w-25">
+              <p>ダウンロード画像</p>
+              <img src="{{ asset("storage/{$image_id->file_path}") }}" class="w-100 mt_20"/>
+            </td>
             <td>画像NO.</td>
-            <td>{{ $image_id->id }}</td>
+            <td>No. {{ $image_id->id }}</td>
           </tr>
           <tr>
             <td>ファイル名</td>
@@ -48,13 +51,19 @@
   </div>
 </form>
 
-{{-- 削除フォーム --}}
-<form action="{{ route('postDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 mt_10">
-  <td rowspan="1">
-    @csrf
-    <button type="submit" class="btn btn-danger" onclick=>削除</button>
-  </td>
-</form>
+<div class="row mt_10">
+  <p class="col-lg-2 pl_0">
+    <a href="#" onClick="history.back(); return false;" class="btn btn-primary">前のページにもどる</a>
+  </p>
+  
+  {{-- 削除フォーム --}}
+  <form action="{{ route('postDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 col-lg-2">
+      @csrf
+
+      <button type="submit" class="btn btn-danger w-100" onclick=>削除</button>
+  </form>
+</div>
+
 
 
 

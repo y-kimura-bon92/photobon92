@@ -47,3 +47,8 @@ body {
 .grad-trigger:checked ~ .grad-item::before {
   display: none; /*チェックされていたら、grad-itemのbeforeを非表示にする*/
 }
+
+
+input[type="file"] {
+	padding: 30px 8px;
+}

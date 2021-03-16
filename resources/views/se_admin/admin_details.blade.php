@@ -16,16 +16,20 @@
   @csrf
 
   <input type="hidden" name="image_id" value="{{ $image_id->id }}">
-  <input type="hidden" name="file_name" value="{{ $image_id->file_name }}">
+  {{-- <input type="hidden" name="file_name" value="{{ $image_id->file_name }}"> --}}
 
   <div class="card bg-light">
     <div class="card-body">
       <table class="table table-bordered bg-white">
         <tbody>
           <tr>
-            <td rowspan="4" class="w-25"><img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image_id->file_path}") }}" class="w-100"/></td>
+            <td rowspan="3" class="w-25">
+              <p>ダウンロード画像</p>
+              <img src="{{ asset("storage/{$image_id->file_path}") }}" class="w-100 mt_20"/>
+              <input type="file" name="image" accept="image/png, image/jpeg ,image/jpg" class="form-control mt_20" value="{{ $image_id->file_name }}">
+            </td>
             <td>画像NO.</td>
-            <td>{{ $image_id->id }}</td>
+            <td>No. {{ $image_id->id }}</td>
           </tr>
           <tr>
             <td>ファイル名</td>
@@ -36,6 +40,11 @@
             <td><input type="text" name="image_name" value="{{ $image_id->image_name }}" class="form-control"></td>
           </tr>
           <tr>
+            <td class="w-25 bg-light">
+              <p>サムネイル画像</p>
+              <img src="{{ asset("storage/{$image_id->file_path_th}") }}" class="w-50 mt_20"/>
+              <input type="file" name="image_th" accept="image/png, image/jpeg ,image/jpg" class="form-control mt_20" value="{{ $image_id->file_name_th }}">
+            </td>
             <td>カテゴリー</td>
             <td><textarea name="image_category" id="" cols="30" rows="10" class="form-control">{{ $image_id->image_category }}</textarea>
           </tr>
@@ -49,13 +58,18 @@
   </div>
 </form>
 
-{{-- 削除フォーム --}}
-<form action="{{ route('SePostDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 mt_10">
-  <td rowspan="1">
-    @csrf
-    <button type="submit" class="btn btn-danger" onclick=>削除</button>
-  </td>
-</form>
+<div class="row mt_10">
+  <p class="col-lg-2 pl_0">
+    <a href="#" onClick="history.back(); return false;" class="btn btn-primary">前のページにもどる</a>
+  </p>
+  
+  {{-- 削除フォーム --}}
+  <form action="{{ route('SePostDelete_92', $image_id->id) }}" method="POST" onclick="return checkDelete()" class="mb_120 col-lg-2">
+      @csrf
+
+      <button type="submit" class="btn btn-danger w-100" onclick=>削除</button>
+  </form>
+</div>
 
 
 

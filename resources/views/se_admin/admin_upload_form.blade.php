@@ -35,15 +35,23 @@
       <table class="table table-bordered bg-white">
         <tbody>
           <tr>
-						<td>画像</td>
-            <td><input type="file" name="image" accept="image/png, image/jpeg ,image/jpg">
+						<td class="text-center" style="vertical-align: middle">画像</td>
+            <td>
+              <input type="file" name="image" accept="image/png, image/jpeg ,image/jpg" class="form-control">
+            </td>
           </tr>
           <tr>
-						<td>画像名</td>
+						<td class="text-center" style="vertical-align: middle">画像（サムネイル）</td>
+            <td>
+              <input type="file" name="image_th" accept="image/png, image/jpeg ,image/jpg" class="form-control">
+            </td>
+          </tr>
+          <tr>
+						<td class="text-center" style="vertical-align: middle">画像名</td>
             <td><input type="text" name="image_name" class="form-control"></td>
           </tr>
           <tr>
-            <td>カテゴリー</td>
+            <td class="text-center" style="vertical-align: middle">カテゴリー</td>
             <td><textarea name="image_category" id="" cols="30" rows="10" class="form-control"></textarea>
           </tr>
         </tbody>

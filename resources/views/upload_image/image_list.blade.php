@@ -17,13 +17,13 @@
 
   <div class="form-group row">
     {{-- 入力欄 --}}
-    <input type="text" class="col-lg-8" placeholder="検索したい名前を入力してください" name="keyword_image_name">
+    <input type="text" class="col-lg-8" placeholder="検索したいキーワードを入力してください" name="keyword_image_name">
     <button type="submit" class="btn btn-success col-lg-4">検索</button>
   </div>
 </form>
 
 @if(!empty($message))
-  <div class="alert alert-primary" role="alert">{{ $message}}</div>
+  <div class="alert alert-primary" role="alert">{{ $message }}</div>
 @endif
 
 @if(isset($images))
@@ -32,8 +32,8 @@
     @foreach($images as $image)
     <div class="col-lg-3 col-4 mb_40 sp_mb_20 text-center image_item">
       {{-- lightbox --}}
-      <a href="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" data-lightbox="fuga" data-title="{{ $image->image_name }}">
-        <img src="{{ url("https://kachibon.work/photobon92/public/storage/{$image->file_path}") }}" alt="{{ $image->image_name }}" class="image">
+      <a href="{{ asset("storage/{$image->file_path}") }}" data-lightbox="fuga" data-title="{{ $image->image_name }}">
+        <img class="lazy image" data-original="{{ asset("storage/{$image->file_path}") }}" alt="{{ $image->image_name }}">
       </a>
       
       <p class="mt_10 sp_mt_0">

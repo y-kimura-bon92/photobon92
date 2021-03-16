@@ -11,18 +11,27 @@ class SeUploadImageController extends Controller
     // 画像一覧を表示
     public function SeGetList(Request $request) {
         // 入力されたキーワードを取得
-        $keyword_image_names = $request->keyword_image_name;
-        
-        if(!empty($keyword_image_names)) {
+        $keywords = $request->input('keyword_image_name');
+
+        // キーワードの入力が確認できた場合
+        if(!empty($keywords)) {
             $query = SeUploadImage::query();
-            $images = $query->where('image_category', 'like', '%'.$keyword_image_names.'%')->paginate(15);
-            $message = "「".$keyword_image_names."」を含む検索結果が見つかりました。";
+
+            // 一致する画像名、カテゴリをDBから取得
+            foreach ((array)$keywords as $keyword) {
+                $images = $query->where('image_category','like','%'.$keyword.'%')->orWhere('image_name', 'LIKE', '%'.$keyword.'%')->orderBy('created_at','desc')->paginate(48);
+            }
+
+            // 表示件数のカウント数を取得
+            $count = $query->where('image_category','like','%'.$keyword.'%')->orWhere('image_name', 'LIKE', '%'.$keyword.'%')->orderBy('created_at','desc')->count();
+            $message = "「".$keywords."」を含む検索結果が（".$count."）件見つかりました。";
         } else {
-            // 15件づつページネートを表示する
-            $images = SeUploadImage::paginate(15);
-            $message = "「".$keyword_image_names."」を含む検索結果が見つかりませんでした。";
+            // 48件づつページネートを表示する
+            $images = SeUploadImage::orderBy('created_at','desc')->paginate(48);
+            $count = SeUploadImage::count();
+            $message = "検索結果が見つかりませんでした。 「全画像数（".$count."件）」";
         }
 
-        return view("se_upload_image.image_list", ['images' => $images, 'message' => $message]);
+        return view("se_upload_image.image_list", ['images' => $images, 'message' => $message, 'keywords' => $keywords]);
     }
 }
