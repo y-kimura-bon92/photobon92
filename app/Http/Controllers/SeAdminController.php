@@ -77,7 +77,7 @@ class SeAdminController extends Controller
             $message = "検索結果が見つかりませんでした。 「全画像数（".$count."件）」";
         }
 
-        return view("se_admin.admin_image_list", ['images' => $images, 'message' => $message, 'keywords' => $keywords, 'image_size' => $image_size]);
+        return view("se_admin.admin_image_list", ['images' => $images, 'message' => $message, 'keywords' => $keywords]);
     }
 
 

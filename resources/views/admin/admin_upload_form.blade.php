@@ -5,7 +5,7 @@
 
 
 {{-- 画像一覧 --}}
-<h2 class="mt_120">SE管理画面｜画像アップロード</h2>
+<h2 class="mt_120">画像アップロード</h2>
 
 @if (session('err_msg'))
   <p class="text-danger">

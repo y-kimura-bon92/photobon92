@@ -19,7 +19,7 @@ class SeUploadImageController extends Controller
 
             // 一致する画像名、カテゴリをDBから取得
             foreach ((array)$keywords as $keyword) {
-                $images = $query->where('image_category','like','%'.$keyword.'%')->orWhere('image_name', 'LIKE', '%'.$keyword.'%')->orderBy('created_at','desc')->paginate(48);
+                $images = $query->where('image_category','like','%'.$keyword.'%')->orWhere('image_name', 'LIKE', '%'.$keyword.'%')->orderBy('created_at','desc')->paginate(36);
             }
 
             // 表示件数のカウント数を取得
@@ -27,7 +27,7 @@ class SeUploadImageController extends Controller
             $message = "「".$keywords."」を含む検索結果が（".$count."）件見つかりました。";
         } else {
             // 48件づつページネートを表示する
-            $images = SeUploadImage::orderBy('created_at','desc')->paginate(48);
+            $images = SeUploadImage::orderBy('created_at','desc')->paginate(36);
             $count = SeUploadImage::count();
             $message = "検索結果が見つかりませんでした。 「全画像数（".$count."件）」";
         }

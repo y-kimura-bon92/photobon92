@@ -1,4 +1,4 @@
-@extends('layouts.layout')
+@extends('layouts.selayout')
 
 @push('css')
     <link href="{{ asset('css/image_list.css') }}" rel="stylesheet">
